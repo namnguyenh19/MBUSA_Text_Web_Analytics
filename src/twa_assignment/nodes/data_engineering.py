@@ -14,7 +14,7 @@ def preprocess_reviews(reviews: pd.DataFrame) -> pd.DataFrame:
     # Rename columns of data frame
     reviews = reviews.rename(
         columns={
-            "Unnamed: 0": "id",
+            "Unnamed: 0": "review_id",
             "Clothing ID": "product_id",
             "Age": "author_age",
             "Title": "review_title",
@@ -27,10 +27,6 @@ def preprocess_reviews(reviews: pd.DataFrame) -> pd.DataFrame:
             "Class Name": "product_category_class",
         }
     )
-
-    # Update review index
-    assert reviews["id"].is_unique, "Review identifier must be unique."
-    reviews = reviews.set_index("id")
 
     # Lower case of category hierarchy
     category_hierarchy = [
