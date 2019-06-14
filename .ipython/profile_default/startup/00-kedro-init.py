@@ -14,7 +14,7 @@ def reload_kedro(line=None):
     global startup_error
     try:
         import kedro.config.default_logger
-        from twa_assignment.run import create_catalog, get_config
+        from master.run import create_catalog, get_config
 
         proj_name = "TWA Assignment"
         logging.info("** Kedro project {}".format(proj_name))
@@ -31,19 +31,19 @@ def reload_kedro(line=None):
         if "create_catalog" in str(err):
             message = (
                 "The function `create_catalog` is missing from "
-                "twa-assignment/src/"
-                "twa_assignment/run.py."
+                "MBUSA_Text_Web_Analytics/src/"
+                "master/run.py."
                 "\nEither restore this function, or update "
-                "twa-assignment/"
+                "MBUSA_Text_Web_Analytics/"
                 ".ipython/profile_default/startup/00-kedro-init.py."
             )
         elif "get_config" in str(err):
             message = (
                 "The function `get_config` is missing from "
-                "twa-assignment/src/"
-                "twa_assignment/run.py."
+                "MBUSA_Text_Web_Analytics/src/"
+                "master/run.py."
                 "\nEither restore this function, or update "
-                "twa-assignment/"
+                "MBUSA_Text_Web_Analytics/"
                 ".ipython/profile_default/startup/00-kedro-init.py."
             )
         else:
