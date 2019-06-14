@@ -39,7 +39,7 @@ from kedro.io import DataCatalog
 from kedro.runner import SequentialRunner
 from kedro.utils import load_obj
 
-from twa_assignment.pipeline import create_pipeline
+from master.pipeline import create_pipeline
 
 # Name of root directory containing project configuration.
 CONF_ROOT = "conf"
@@ -115,11 +115,7 @@ def create_catalog(config: ConfigLoader, **kwargs) -> DataCatalog:
     return catalog
 
 
-def main(
-    tags: Iterable[str] = None,
-    env: str = None,
-    runner: str = None,
-):
+def main(tags: Iterable[str] = None, env: str = None, runner: str = None):
     """Application main entry point.
 
     Args:

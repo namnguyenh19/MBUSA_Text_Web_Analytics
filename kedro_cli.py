@@ -83,6 +83,7 @@ This option cannot be used together with --parallel."""
 def __get_kedro_context__():
     """Used to provide this project's context to plugins."""
     from twa_assignment.run import __kedro_context__
+
     return __kedro_context__()
 
 
@@ -92,13 +93,16 @@ def cli():
 
 
 @cli.command()
-@click.option("--runner", "-r", type=str, default=None, multiple=False, help=RUNNER_ARG_HELP)
+@click.option(
+    "--runner", "-r", type=str, default=None, multiple=False, help=RUNNER_ARG_HELP
+)
 @click.option("--parallel", "-p", is_flag=True, multiple=False, help=PARALLEL_ARG_HELP)
 @click.option("--env", "-e", type=str, default=None, multiple=False, help=ENV_ARG_HELP)
 @click.option("--tag", "-t", type=str, default=None, multiple=True, help=TAG_ARG_HELP)
 def run(tag, env, parallel, runner):
     """Run the pipeline."""
-    from twa_assignment.run import main
+    from master.run import main
+
     if parallel and runner:
         raise KedroCliError(
             "Both --parallel and --runner options cannot be used together. "
@@ -146,20 +150,10 @@ def build_docs():
     """Build the project documentation."""
     python_call("pip", ["install", "src/[docs]"])
     python_call("pip", ["install", "-r", "src/requirements.txt"])
-    python_call(
-        "ipykernel", ["install", "--user", "--name=twa_assignment"]
-    )
+    python_call("ipykernel", ["install", "--user", "--name=twa_assignment"])
     if Path("docs/build").exists():
         shutil.rmtree("docs/build")
-    call(
-        [
-            "sphinx-apidoc",
-            "--module-first",
-            "-o",
-            "docs/source",
-            "src/twa_assignment",
-        ]
-    )
+    call(["sphinx-apidoc", "--module-first", "-o", "docs/source", "src/twa_assignment"])
     call(["sphinx-build", "-M", "html", "docs/source", "docs/build", "-a"])
 
 

@@ -29,7 +29,7 @@
 
 from kedro.pipeline import Pipeline, node
 
-from twa_assignment.nodes.data_engineering import preprocess_reviews
+from master.nodes.preprocessing import preprocess_reviews
 
 
 def create_pipeline(**kwargs):
