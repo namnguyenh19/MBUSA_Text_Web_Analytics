@@ -8,5 +8,5 @@ reviews:
   filepath: data/01_raw/reviews.csv
 
 preproc_reviews:
-  type: CSVLocalDataSet
-  filepath: data/02_intermediate/preproc_reviews.csv
+  type: PickleLocalDataSet
+  filepath: data/02_intermediate/preproc_reviews.pkl
