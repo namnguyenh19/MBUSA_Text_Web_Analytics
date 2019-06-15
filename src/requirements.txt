@@ -10,3 +10,4 @@ wheel==0.32.2
 wordcloud
 nltk
 matplotlib
+pyspellchecker
