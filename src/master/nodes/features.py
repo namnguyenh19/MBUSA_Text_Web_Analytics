@@ -35,7 +35,7 @@ def _punc_count(text):
     return len([word for word in text.split() if word in punctuation])
 
 
-def get_summary_features(reviews: pd.DataFrame) -> pd.DataFrame:
+def summarise_text(reviews: pd.DataFrame) -> pd.DataFrame:
     """Extracts summary features from the review text.
 
     These features are on simple descriptive statistics of the review text
@@ -49,10 +49,11 @@ def get_summary_features(reviews: pd.DataFrame) -> pd.DataFrame:
         Args:
             reviews: Preprocessed data.
         Returns:
-            Data frame with primary features added as new columns.
+            Pandas data frame with summary features added as new columns.
 
     """
 
+    # Generate summary statistics
     reviews["text_word_count"] = reviews["review_text"].apply(_word_count)
     reviews["text_char_count"] = reviews["review_text"].apply(_char_count)
     reviews["text_avg_word"] = reviews["review_text"].apply(_avg_word)
@@ -61,5 +62,8 @@ def get_summary_features(reviews: pd.DataFrame) -> pd.DataFrame:
     reviews["text_num_count"] = reviews["review_text"].apply(_num_count)
     reviews["text_upper_count"] = reviews["review_text"].apply(_upper_count)
     reviews["text_punc_count"] = reviews["review_text"].apply(_punc_count)
+
+    # Filter summary statistics
+    reviews = reviews.filter(like="text")
 
     return reviews
