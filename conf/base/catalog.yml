@@ -3,10 +3,22 @@
 # Documentation for this file format can be found in the kedro docs under `Accessing data`
 # You can access the kedro docs by running `kedro docs`
 
+# Raw source data
 reviews:
   type: CSVLocalDataSet
   filepath: data/01_raw/reviews.csv
 
-preproc_reviews:
+# Preprocessed data
+reviews_preproc:
   type: PickleLocalDataSet
-  filepath: data/02_intermediate/preproc_reviews.pkl
+  filepath: data/02_intermediate/reviews_preproc.pkl
+
+# Clean data (missing values omitted or imputed where required)
+reviews_clean:
+  type: PickleLocalDataSet
+  filepath: data/02_intermediate/reviews_clean.pkl
+
+# Primary text features
+reviews_primary:
+  type: PickleLocalDataSet
+  filepath: data/03_primary/reviews_primary.pkl

@@ -1,18 +1,18 @@
 import pandas as pd
 
 
-def preprocess_reviews(reviews: pd.DataFrame) -> pd.DataFrame:
+def preprocess_columns(reviews: pd.DataFrame) -> pd.DataFrame:
     """Preprocess the review data.
 
         Args:
             reviews: Source data.
         Returns:
-            preproc_reviews: Preprocessed data.
+            Preprocessed data.
 
     """
 
     # Rename columns of data frame
-    preproc_reviews = reviews.rename(
+    reviews = reviews.rename(
         columns={
             "Unnamed: 0": "id",
             "Clothing ID": "product_id",
@@ -29,8 +29,8 @@ def preprocess_reviews(reviews: pd.DataFrame) -> pd.DataFrame:
     )
 
     # Update review index
-    assert preproc_reviews["id"].is_unique, "Review identifier must be unique."
-    preproc_reviews = preproc_reviews.set_index("id")
+    assert reviews["id"].is_unique, "Review identifier must be unique."
+    reviews = reviews.set_index("id")
 
     # Lower case of category hierarchy
     category_hierarchy = [
@@ -38,16 +38,29 @@ def preprocess_reviews(reviews: pd.DataFrame) -> pd.DataFrame:
         "product_category_department",
         "product_category_class",
     ]
-    preproc_reviews[category_hierarchy] = preproc_reviews[category_hierarchy].apply(
+    reviews[category_hierarchy] = reviews[category_hierarchy].apply(
         lambda x: x.str.lower(), axis=0
     )
 
     # Replace incorrect spelling of 'intimates'
-    preproc_reviews["product_category_division"] = preproc_reviews[
-        "product_category_division"
-    ].replace("initmates", "intimates")
+    reviews["product_category_division"] = reviews["product_category_division"].replace(
+        "initmates", "intimates"
+    )
+
+    return reviews
+
+
+def clean_missing_values(reviews: pd.DataFrame) -> pd.DataFrame:
+    """Fixes missing values in the data by omitting or imputing where required.
+
+        Args:
+            reviews: Preprocessed data.
+        Returns:
+            Data frame with missing values omitted or imputed.
+
+    """
 
     # Remove reviews without review text
-    preproc_reviews = preproc_reviews.dropna(subset=["review_text"])
+    reviews = reviews.dropna(subset=["review_text"])
 
-    return preproc_reviews
+    return reviews
