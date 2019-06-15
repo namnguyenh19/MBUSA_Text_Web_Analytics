@@ -16,9 +16,9 @@ reviews_preproc:
 # Clean data (missing values omitted or imputed where required)
 reviews_clean:
   type: PickleLocalDataSet
-  filepath: data/02_intermediate/reviews_clean.pkl
+  filepath: data/03_primary/reviews_clean.pkl
 
-# Primary text features
-reviews_primary:
+# Text summary features
+reviews_summary:
   type: PickleLocalDataSet
-  filepath: data/03_primary/reviews_primary.pkl
+  filepath: data/04_features/reviews_summary.pkl

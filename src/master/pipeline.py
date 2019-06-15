@@ -30,7 +30,7 @@
 from kedro.pipeline import Pipeline, node
 
 from master.nodes.preproc import preprocess_columns, clean_missing_values
-from master.nodes.features import get_primary_features
+from master.nodes.features import get_summary_features
 
 
 def create_pipeline(**kwargs):
@@ -48,7 +48,7 @@ def create_pipeline(**kwargs):
         [
             node(preprocess_columns, "reviews", "reviews_preproc"),
             node(clean_missing_values, "reviews_preproc", "reviews_clean"),
-            node(get_primary_features, "reviews_clean", "reviews_primary"),
+            node(get_summary_features, "reviews_clean", "reviews_summary"),
         ]
     )
 

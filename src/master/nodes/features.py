@@ -35,10 +35,10 @@ def _punc_count(text):
     return len([word for word in text.split() if word in punctuation])
 
 
-def get_primary_features(reviews: pd.DataFrame) -> pd.DataFrame:
-    """Extracts primary features from the review text.
+def get_summary_features(reviews: pd.DataFrame) -> pd.DataFrame:
+    """Extracts summary features from the review text.
 
-    These features are on simple summary statistics of the review text
+    These features are on simple descriptive statistics of the review text
     or aspects of the documents that will be removed during tokenisation, such as:
         - Raw character count
         - Raw word count
