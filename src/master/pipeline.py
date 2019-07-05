@@ -29,8 +29,8 @@
 
 from kedro.pipeline import Pipeline, node
 
-from master.nodes.cleaning import preprocess_columns, clean_missing_values
-from master.nodes.features import summarise_text
+from master.nodes.ETL import *
+from master.nodes.features import *
 
 
 def create_pipeline(**kwargs):
@@ -44,14 +44,20 @@ def create_pipeline(**kwargs):
 
     """
 
-    pipeline = Pipeline(
+    ####################################################################################
+    # 01: ETL
+    ####################################################################################
+    ETL = Pipeline(
         [
-            # 01: Cleaning
             node(preprocess_columns, "reviews", "reviews_preproc"),
-            node(clean_missing_values, "reviews_preproc", "reviews_master"),
-            # 02: Features
-            node(summarise_text, "reviews_master", "text_summary"),
-        ]
+            node(clean_missing_values, "reviews_preproc", "reviews_clean"),
+        ],
+        name="ETL",
     )
 
-    return pipeline
+    ####################################################################################
+    # 02: Feature Engineering
+    ####################################################################################
+    features = Pipeline([node()], name="features")
+
+    return ETL + features
