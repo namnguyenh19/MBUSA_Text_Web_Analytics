@@ -13,9 +13,9 @@ reviews:
 # 02 - Intermediate:
 
 ## Preprocessed data
-reviews_prperoc:
+reviews_clean:
   type: PickleLocalDataSet
-  filepath: data/02_intermediate/reviews_preproc.pkl
+  filepath: data/02_intermediate/reviews_clean.pkl
 
 # 03 - Primary:
 
