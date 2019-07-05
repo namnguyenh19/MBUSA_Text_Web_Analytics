@@ -215,6 +215,6 @@ def clean_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     df_clean = drop_missing_text(df)
 
     # Impute missing categories
-    df_clean = impute_categories(df)
+    df_clean = impute_categories(df_clean)
 
     return df_clean

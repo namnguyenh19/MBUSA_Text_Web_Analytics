@@ -58,6 +58,5 @@ def create_pipeline(**kwargs):
     ####################################################################################
     # 02: Feature Engineering
     ####################################################################################
-    features = Pipeline([node()], name="features")
 
-    return ETL + features
+    return ETL
