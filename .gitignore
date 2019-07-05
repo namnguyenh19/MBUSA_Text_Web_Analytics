@@ -1,13 +1,51 @@
+##########################
+# KEDRO PROJECT
+
+# ignore all local configuration
+conf/local/**
+!conf/local/.gitkeep
+
+# keep all .gitkeep files
+!.gitkeep
+
+##########################
+# Common files
+
+# IntelliJ
+.idea/
+*.iml
+out/
+.idea_modules/
+
+### macOS
+*.DS_Store
+.AppleDouble
+.LSOverride
+.Trashes
+
+# Vim
+*~
+.*.swo
+.*.swp
+
+# emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# C extensions
+*.so
+
+### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-
-# iPython configs
-.ipython/
-
-# C extensions
-*.so
 
 # Distribution / packaging
 .Python
@@ -48,7 +86,6 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
-.pytest_cache/
 
 # Translations
 *.mo
@@ -56,8 +93,9 @@ coverage.xml
 
 # Django stuff:
 *.log
+.static_storage/
+.media/
 local_settings.py
-db.sqlite3
 
 # Flask stuff:
 instance/
@@ -74,6 +112,9 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+
+# iPython config
+.ipython/**
 
 # pyenv
 .python-version
@@ -92,13 +133,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
 
 # mkdocs documentation
 /site
