@@ -11,3 +11,4 @@ wordcloud
 nltk
 matplotlib
 pyspellchecker
+spacy
