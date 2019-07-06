@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from nltk.corpus import stopwords
 
 stops = stopwords.words("english")
@@ -7,7 +8,7 @@ from string import punctuation
 
 
 def _word_count(text):
-    return len(text.split())
+    return len(text.split()) if text != np.nan else np.nan
 
 
 def _char_count(text):
