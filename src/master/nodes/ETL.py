@@ -1,14 +1,7 @@
 import pandas as pd
 import numpy as np
 import typing
-
-
-def wc(x):
-    """Count words in string."""
-    if x == np.nan:
-        return np.nan
-    else:
-        return len(x.split())
+from master.nodes.features import _word_count
 
 
 def summarise(df):
@@ -18,10 +11,14 @@ def summarise(df):
     nulls = df.isnull().sum()  # number of null values
     not_nulls = df.notnull().sum()  # number of not-null values
     avg_wcs = df.apply(
-        lambda col: np.mean(col.apply(lambda x: wc(x) if type(x) == str else np.nan))
+        lambda col: np.mean(
+            col.apply(lambda x: _word_count(x) if type(x) == str else np.nan)
+        )
     )
     wcs = df.apply(
-        lambda col: np.mean(col.apply(lambda x: wc(x) if type(x) == str else np.nan))
+        lambda col: np.mean(
+            col.apply(lambda x: _word_count(x) if type(x) == str else np.nan)
+        )
     )
     uniques = df.apply(lambda col: len(col.unique()))
     summary1 = pd.DataFrame(
@@ -89,8 +86,8 @@ def text_fields(df: pd.DataFrame) -> list:
 
 
 def drop_missing_text(df):
-    """Drop any reviews that are missing entries for all text fields."""
-    return df.dropna(subset=text_fields(df).columns, how="all")
+    """Drop any reviews that do not have body text."""
+    return df.dropna(subset=["review_text"], how="all")
 
 
 # Find missing categories
