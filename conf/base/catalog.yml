@@ -25,7 +25,7 @@ reviews_preproc:
 # 03: PRIMARY
 ######################################################
 
-## Clean table without missing values
+## Master table (without missing values)
 reviews_clean:
   type: PickleLocalDataSet
   filepath: data/03_primary/reviews_clean.pkl
